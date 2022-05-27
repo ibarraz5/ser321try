@@ -61,7 +61,7 @@ class WebServer {
       if (sock != null) {
         try {
           server.close();
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IOException e) {
           // TODO Auto-generated catch block
           System.out.println("NullPointerException thrown!"); 
           e.printStackTrace();
