@@ -25,6 +25,9 @@ import java.util.Random;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.nio.charset.Charset;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 
 class WebServer {
   public static void main(String args[]) {
@@ -210,14 +213,15 @@ class WebServer {
           //catches error if inputs aren't correct
           try{ 
           Integer result = num1 * num2;
-          }catch(ArithmeticException e){
-           System.out.print("NumberFormatException has occured!");
-          }  
-          // Generate response
+                  // Generate response
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
           builder.append("Result is: " + result);
+          }catch(ArithmeticException e){
+           System.out.print("NumberFormatException has occured!");
+          }  
+
 
           // TODO: Include error handling here with a correct error code and
           // a response that makes sense
