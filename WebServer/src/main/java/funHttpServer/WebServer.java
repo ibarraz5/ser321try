@@ -230,7 +230,10 @@ class WebServer {
           //     then drill down to what you care about
           // "Owner's repo is named RepoName. Example: find RepoName's contributors" translates to
           //     "/repos/OWNERNAME/REPONAME/contributors"
-
+          File file = new File("www/github.html");
+          builder.append("\n");
+          builder.append(new String(readFileInBytes(file))); 
+           
           Map<String, String> query_pairs = new LinkedHashMap<String, String>();
           query_pairs = splitQuery(request.replace("github?", ""));
           String json = fetchURL("https://api.github.com/" + query_pairs.get("query"));
