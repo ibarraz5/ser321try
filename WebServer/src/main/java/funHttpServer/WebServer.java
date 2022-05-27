@@ -224,7 +224,7 @@ class WebServer {
           // TODO: Include error handling here with a correct error code and
           // a response that makes sense
 
-        } else if (request.contains("github")) {
+        } else if (request.contains("github?query=users/amehlhase316/repos")) { 
           // pulls the query from the request and runs it with GitHub's REST API
           // check out https://docs.github.com/rest/reference/
           //
