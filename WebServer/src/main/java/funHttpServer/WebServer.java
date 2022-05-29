@@ -9,7 +9,6 @@ You can also do some other simple GET requests:
 5) /github?query=users/amehlhase316/repos (or other GitHub repo owners) will lead to receiving
    JSON which will for now only be printed in the console. See the todo below
 6) /survey generates a survey form that can be filled out and submitted
-
 The reading of the request is done "manually", meaning no library that helps making things a 
 little easier is used. This is done so you see exactly how to pars the request and 
 write a response back
@@ -229,6 +228,40 @@ class WebServer {
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
           builder.append("Result is: " + result);
+          }catch(ArithmeticException e){
+           System.out.print("NumberFormatException has occured!");
+          }  
+
+
+          // TODO: Include error handling here with a correct error code and
+          // a response that makes sense
+
+        }else if (request.contains("image")) {
+          // This multiplies two numbers, there is NO error handling, so when
+          // wrong data is given this just crashes
+
+          Map<String> query = new LinkedHashMap<String>();
+          // extract path parameters
+          query = splitQuery(request.replace("image?", ""));
+
+          // extract required fields from parameters
+          String path = String.parseString(query.get("path"));
+
+          try{ 
+             URL url= new URL(path);
+             BufferedImage image = ImageIO.read(url);
+             JLabel label = new JLabel(new ImageIcon(image));
+             JFrame f = new JFrame();
+             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             f.getContentPane().add(label);
+             f.pack();
+             f.setLocation(200, 200);
+             f.setVisible(true);
+                  // Generate response
+          builder.append("HTTP/1.1 200 OK\n");
+          builder.append("Content-Type: text/html; charset=utf-8\n");
+          builder.append("\n");
+          builder.append("Your Image is: \n " + image);
           }catch(ArithmeticException e){
            System.out.print("NumberFormatException has occured!");
           }  
