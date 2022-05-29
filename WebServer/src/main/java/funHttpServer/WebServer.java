@@ -251,7 +251,7 @@ class WebServer {
 
           // extract required fields from parameters
           String path = query.get("path");
-          String path2 = String.(query.get("path2"));
+          String path2 = query.get("path2");
 
 
           try{ 
