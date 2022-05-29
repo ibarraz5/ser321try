@@ -177,7 +177,19 @@ class WebServer {
           builder.append("\n");
           builder.append(new String(readFileInBytes(file)));
 
-        } else if (request.contains("file/")) {
+        } else if (request.equalsIgnoreCase("survey")) {
+          // opens the random image page
+
+          // open the index.html
+          File file = new File("www/survey.html");
+
+          // Generate response
+          builder.append("HTTP/1.1 200 OK\n");
+          builder.append("Content-Type: text/html; charset=utf-8\n");
+          builder.append("\n");
+          builder.append(new String(readFileInBytes(file)));
+
+        }else if (request.contains("file/")) {
           // tries to find the specified file and shows it or shows an error
 
           // take the path and clean it. try to open the file
