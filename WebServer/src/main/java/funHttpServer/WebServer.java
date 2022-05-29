@@ -250,8 +250,8 @@ class WebServer {
           query = splitQuery(request.replace("image?", ""));
 
           // extract required fields from parameters
-          String path = String.parseString(query.get("path"));
-          String path2 = String.parseString(query.get("path2"));
+          String path = String(query.get("path"));
+          String path2 = String(query.get("path2"));
 
 
           try{ 
