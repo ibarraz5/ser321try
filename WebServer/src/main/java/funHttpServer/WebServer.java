@@ -278,8 +278,8 @@ class WebServer {
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
           builder.append("Your Image is: \n " + image);
-          }catch(ArithmeticException e){
-           System.out.print("NumberFormatException has occured!");
+          }catch(Exception e){
+           System.out.print("Invalid Image!");
           }  
 
 
