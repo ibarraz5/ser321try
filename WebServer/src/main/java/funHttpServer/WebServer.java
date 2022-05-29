@@ -245,12 +245,14 @@ class WebServer {
           // This multiplies two numbers, there is NO error handling, so when
           // wrong data is given this just crashes
 
-          Map<String> query = new LinkedHashMap<String>();
+          Map<String, String> query = new LinkedHashMap<String, String>();
           // extract path parameters
           query = splitQuery(request.replace("image?", ""));
 
           // extract required fields from parameters
           String path = String.parseString(query.get("path"));
+          String path2 = String.parseString(query.get("path2"));
+
 
           try{ 
              URL url= new URL(path);
@@ -262,6 +264,15 @@ class WebServer {
              f.pack();
              f.setLocation(200, 200);
              f.setVisible(true);
+             URL url2= new URL(path2);
+             BufferedImage image2 = ImageIO.read(url2);
+             JLabel label2 = new JLabel(new ImageIcon(image2));
+             JFrame f2 = new JFrame();
+             f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             f2.getContentPane().add(label2);
+             f2.pack();
+             f2.setLocation(200, 200);
+             f2.setVisible(true);             
                   // Generate response
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
