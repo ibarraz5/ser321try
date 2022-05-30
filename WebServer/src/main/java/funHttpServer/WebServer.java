@@ -250,11 +250,12 @@ class WebServer {
           query = splitQuery(request.replace("image?", ""));
 
           // extract required fields from parameters
-          String path = query.get("path");
-          String path2 = query.get("path2");
+          Integer image1 = Integer.parseInt(query_pairs.get("image1"));
+          Integer image2 = Integer.parseInt(query_pairs.get("image2"));
 
-
+          if(image1=1){
           try{ 
+             String path= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
              URL url= new URL(path);
              BufferedImage image = ImageIO.read(url);
              JLabel label = new JLabel(new ImageIcon(image));
@@ -264,9 +265,18 @@ class WebServer {
              f.pack();
              f.setLocation(200, 200);
              f.setVisible(true);
+             builder.append("HTTP/1.1 200 OK\n");
+          builder.append("Content-Type: text/html; charset=utf-8\n");
+          builder.append("\n");
+          builder.append("Your Image1 is: \n " + image);
+          }catch(Exception e){
+           System.out.print("Invalid Image!");
+          }  
+          }else if(image2=2){
+             String path2= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
              URL url2= new URL(path2);
-             BufferedImage image2 = ImageIO.read(url2);
-             JLabel label2 = new JLabel(new ImageIcon(image2));
+             BufferedImage image3 = ImageIO.read(url2);
+             JLabel label2 = new JLabel(new ImageIcon(image3));
              JFrame f2 = new JFrame();
              f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
              f2.getContentPane().add(label2);
@@ -277,10 +287,18 @@ class WebServer {
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
-          builder.append("Your Image is: \n " + image);
+          builder.append("Your Image1 is: \n " + image);
           }catch(Exception e){
            System.out.print("Invalid Image!");
-          }  
+          }          
+          } else {
+          // if the request is not recognized at all
+
+          builder.append("HTTP/1.1 400 Bad Request\n");
+          builder.append("Content-Type: text/html; charset=utf-8\n");
+          builder.append("\n");
+          builder.append("You didn't make a valid image choice...");
+        }
 
 
           // TODO: Include error handling here with a correct error code and
