@@ -247,13 +247,13 @@ class WebServer {
 
           Map<String, String> query = new LinkedHashMap<String, String>();
           // extract path parameters
-          query = splitQuery(request.replace("image?", ""));
+          query_pairs = splitQuery(request.replace("image?", ""));
 
           // extract required fields from parameters
           Integer image1 = Integer.parseInt(query_pairs.get("image1"));
           Integer image2 = Integer.parseInt(query_pairs.get("image2"));
 
-          if(image1=1){
+          if(image1==1){
           try{ 
              String path= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
              URL url= new URL(path);
@@ -272,7 +272,7 @@ class WebServer {
           }catch(Exception e){
            System.out.print("Invalid Image!");
           }  
-          }else if(image2=2){
+          }else if(image2==2){
              try{
              String path2= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
              URL url2= new URL(path2);
@@ -288,7 +288,7 @@ class WebServer {
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
-          builder.append("Your Image1 is: \n " + image);
+          builder.append("Your Image1 is: \n " + image3);
           }catch(Exception e){
            System.out.print("Invalid Image!");
           }          
