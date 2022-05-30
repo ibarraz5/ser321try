@@ -241,58 +241,19 @@ class WebServer {
           // TODO: Include error handling here with a correct error code and
           // a response that makes sense
 
-        }else if (request.contains("image")) {
-          // This multiplies two numbers, there is NO error handling, so when
-          // wrong data is given this just crashes
+        } else if (request.equalsIgnoreCase("invoice")) {
+          // opens the random image page
 
-          Map<String, String> query_pairs = new LinkedHashMap<String, String>();
-          // extract path parameters
-          query_pairs = splitQuery(request.replace("image?", ""));
+          // open the index.html
+          File file = new File("www/invoice.html");
 
-          // extract required fields from parameters
-          Integer image1 = Integer.parseInt(query_pairs.get("image1"));
-          Integer image2 = Integer.parseInt(query_pairs.get("image2"));
-
-          if(image1==1){
-          try{ 
-             String path= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
-             URL url= new URL(path);
-             BufferedImage image = ImageIO.read(url);
-             JLabel label = new JLabel(new ImageIcon(image));
-             JFrame f = new JFrame();
-             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             f.getContentPane().add(label);
-             f.pack();
-             f.setLocation(200, 200);
-             f.setVisible(true);
-             builder.append("HTTP/1.1 200 OK\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
-          builder.append("Your Image1 is: \n " + image);
-          }catch(Exception e){
-           System.out.print("Invalid Image!");
-          }  
-          }else if(image2==2){
-             try{
-             String path2= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
-             URL url2= new URL(path2);
-             BufferedImage image3 = ImageIO.read(url2);
-             JLabel label2 = new JLabel(new ImageIcon(image3));
-             JFrame f2 = new JFrame();
-             f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             f2.getContentPane().add(label2);
-             f2.pack();
-             f2.setLocation(200, 200);
-             f2.setVisible(true);             
-                  // Generate response
+          // Generate response
           builder.append("HTTP/1.1 200 OK\n");
           builder.append("Content-Type: text/html; charset=utf-8\n");
           builder.append("\n");
-          builder.append("Your Image1 is: \n " + image3);
-          }catch(Exception e){
-           System.out.print("Invalid Image!");
-          }          
-          } else {
+          builder.append(new String(readFileInBytes(file)));
+
+        } else {
           // if the request is not recognized at all
 
           builder.append("HTTP/1.1 400 Bad Request\n");
