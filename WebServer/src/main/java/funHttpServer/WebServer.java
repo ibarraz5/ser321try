@@ -273,6 +273,7 @@ class WebServer {
            System.out.print("Invalid Image!");
           }  
           }else if(image2=2){
+             try{
              String path2= "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
              URL url2= new URL(path2);
              BufferedImage image3 = ImageIO.read(url2);
