@@ -253,19 +253,6 @@ class WebServer {
           builder.append("\n");
           builder.append(new String(readFileInBytes(file)));
 
-        } else {
-          // if the request is not recognized at all
-
-          builder.append("HTTP/1.1 400 Bad Request\n");
-          builder.append("Content-Type: text/html; charset=utf-8\n");
-          builder.append("\n");
-          builder.append("You didn't make a valid image choice...");
-        }
-
-
-          // TODO: Include error handling here with a correct error code and
-          // a response that makes sense
-
         } else if (request.contains("github?query=users/amehlhase316/repos")) { 
           // pulls the query from the request and runs it with GitHub's REST API
           // check out https://docs.github.com/rest/reference/
